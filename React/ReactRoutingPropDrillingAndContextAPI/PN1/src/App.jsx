@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import { lazy } from 'react';
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
+import Home from './components/Home';
+//import Dashboard from lazy(() => import('./components/Dashboard');
 
-function App() {
-  const [count, setCount] = useState(0)
+import Navigation from './components/Navigation';
 
+const Dashboard = lazy(() => import('./components/Dashboard');
+
+
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <BrowserRouter>
+        <Navigation />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
+
+    </div>
   )
 }
+
+//---------------------------------------
+// const NavBar = () => {
+
+//   const navigation = useNavigate();
+//   return (
+//     <div>
+//       <button onClick={() => {
+//         navigation("/");
+//       }}>Home</button>
+//       <button onClick={() => {
+//         navigation("/dashboard");
+//       }}>Deshboard</button>
+//     </div>
+//   )
+// }
+
+
+
 
 export default App
