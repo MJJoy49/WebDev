@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { lazy } from 'react';
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
 import Home from './components/Home';
@@ -6,7 +6,7 @@ import Home from './components/Home';
 
 import Navigation from './components/Navigation';
 
-const Dashboard = lazy(() => import('./components/Dashboard');
+const Dashboard = lazy(() => import('./components/Dashboard'));
 
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
         <Navigation />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/dashboard' element={<Suspense fallback={"loding...."}><Dashboard /></Suspense>} />
         </Routes>
       </BrowserRouter>
 
